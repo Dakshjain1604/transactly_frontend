@@ -1,124 +1,116 @@
-# Paytm Clone Frontend
+# Transactly - Full Stack Payments Application
 
-The frontend of the Paytm clone application built with React.js and Tailwind CSS.
+A modern payment application clone built with React, Node.js, and MongoDB, featuring secure authentication, real-time transactions, and a responsive user interface.
+![Screenshot 2025-05-23 at 11 55 14 PM](https://github.com/user-attachments/assets/f6dbe5b4-094f-4854-8828-74b00b46efd7)
 
-## 📸 Screenshots
+## Features
 
-[Add frontend screenshots here]
+- **User Authentication**
+  - Secure login and registration
+  - JWT-based authentication
+  - Password encryption using bcrypt
 
-## 🎨 UI Components
+- **Account Management**
+  - Create and manage user accounts
+  - View transaction history
+  - ![Screenshot 2025-05-23 at 11 55 45 PM](https://github.com/user-attachments/assets/24cf8cd3-3fb1-4732-a763-4314c7155f9a)
 
-### Pages
-- Dashboard
-- Users List
-- Send Money
-- Transaction History
-- Profile
+  - Real-time balance updates
 
-### Components
-- User Card
-- Send Money Button
-- Search Bar
-- Transaction List
-- Navigation Bar
+- **Modern UI/UX**
+  - Responsive design using Tailwind CSS
+  - Clean and intuitive interface
+  - Smooth navigation with React Router
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- React.js
+### Frontend
+- React 19
+- TypeScript
 - Tailwind CSS
-- React Router
-- Axios
-- Vite
+- React Router DOM
+- Axios for API calls
+- Vite for build tooling
 
-## 📁 Project Structure
+### Backend
+- Node.js
+- Express.js
+- MongoDB with Mongoose
+- JWT for authentication
+- Swagger for API documentation
+- Zod for input validation
 
-```
-frontend/
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/         # Page components
-│   ├── subcompoents/  # Sub-components
-│   ├── App.jsx        # Main App component
-│   └── main.jsx       # Entry point
-├── public/            # Static assets
-└── index.html         # HTML template
-```
+## Installation
 
-## 🚀 Getting Started
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB
+- npm or yarn
 
-1. Install dependencies
+### Backend Setup
 ```bash
+cd backend
 npm install
+npm run dev
 ```
 
-2. Create `.env` file
+### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Environment Variables
+
+### Backend (.env)
+```
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+PORT=3000
+```
+
+### Frontend (.env)
 ```
 VITE_API_URL=http://localhost:3000
 ```
 
-3. Start development server
-```bash
-npm run dev
+## API Documentation
+
+API documentation is available at `/api-docs` when running the backend server. The documentation is generated using Swagger/OpenAPI.
+
+## Project Structure
+
+```
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── utils/
+│   └── public/
+│
+└── backend/
+    ├── controllers/
+    ├── routes/
+    ├── middlewares/
+    └── models/
 ```
 
-## 🎯 Features
+## Security Features
 
-- Responsive design for all screen sizes
-- Modern UI with Tailwind CSS
-- Real-time user search
-- Smooth transitions and animations
-- Mobile-first approach
+- Password hashing using bcrypt
+- JWT token-based authentication
+- CORS enabled
+- Input validation using Zod
+- Secure HTTP headers
 
-## 📱 Responsive Design
+## Deployment
 
-The application is fully responsive with specific breakpoints:
-- Mobile: < 640px
-- Tablet: 640px - 1024px
-- Desktop: > 1024px
+The application can be deployed on any cloud platform that supports Node.js and MongoDB. Some recommended platforms:
+- Frontend: Vercel, Netlify
+- Backend: Railway, Render
+- Database: MongoDB Atlas
 
-## 🎨 UI/UX Features
 
-- Clean and modern interface
-- Intuitive navigation
-- Smooth animations
-- Consistent color scheme
-- Accessible design
 
-## 🔧 Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-
-### Code Style
-
-- Follow React best practices
-- Use functional components
-- Implement proper prop types
-- Maintain consistent naming conventions
-
-## 📝 Component Documentation
-
-### User Card Component
-- Displays user information
-- Handles money transfer navigation
-- Responsive design for all screen sizes
-
-### Send Money Button
-- Triggers money transfer flow
-- Handles navigation to transfer page
-- Maintains consistent styling
-
-## 🔍 Future Improvements
-
-- Add dark mode support
-- Implement more animations
-- Add loading skeletons
-- Enhance error handling
-- Add unit tests
-
-## 🤝 Contributing
-
-Please read the main README.md for contribution guidelines.
