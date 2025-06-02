@@ -1,16 +1,17 @@
 import './App.css'
-import { Route,Routes,BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import { Signin } from './components/signin';
 import { Signup } from './components/signup';
 import {Dashboard} from "./components/Dashboard"
 import {SendMoney} from "./components/sendMoney"
 import { History } from './components/history';
+
 function App() {
-  
   return (
     <>
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/signup" replace />} />
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='Signin' element={<Signin/>}></Route>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -20,7 +21,6 @@ function App() {
     </BrowserRouter>
     </>
   )
-    
 }
 
 export default App;
