@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { AppBar } from "./subcompoents/AppBar"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 interface Transaction {
     senderId: string;
@@ -37,7 +38,7 @@ export function History() {
         }
 
         setLoading(true);
-        axios.get("http://localhost:3000/account/getHistory", {
+        axios.get(`${BACKEND_URL}/account/getHistory`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

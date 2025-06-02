@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppBar } from "./subcompoents/AppBar";
 import { FormInput } from "./subcompoents/FormInput";
+import { BACKEND_URL } from "../config";
 
 export function Signup() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export function Signup() {
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
 
-    await axios.post("http://localhost:3000/user/signup", {
+    await axios.post(`${BACKEND_URL}/user/signup`, {
       firstname,
       lastname,
       username,
