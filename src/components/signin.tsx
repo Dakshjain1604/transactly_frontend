@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { AppBar } from "./subcompoents/AppBar";
@@ -9,18 +9,40 @@ export function Signin() {
     const usernameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
+    const [error, setError] = useState<string>("");
+    const [isLoading, setIsLoading] = useState(false);
 
     async function signin() {
         const username = usernameRef.current?.value;
         const password = passwordRef.current?.value;
-        await axios.post(`${BACKEND_URL}/user/signin`, {
-            username,
-            password
-        }).then((response) => {
-            alert(response.status)
-            navigate('/Dashboard')
+
+        if (!username || !password) {
+            setError("Please fill in all fields");
+            return;
+        }
+
+        setIsLoading(true);
+        setError("");
+
+        try {
+            const response = await axios.post(`${BACKEND_URL}/user/signin`, {
+                username,
+                password
+            });
+            
             sessionStorage.setItem("token", response.data.token);
-        });
+            navigate('/Dashboard');
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                setError("Invalid username or password");
+            } else if (error.response?.data?.message) {
+                setError(error.response.data.message);
+            } else {
+                setError("An error occurred. Please try again.");
+            }
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -36,6 +58,12 @@ export function Signin() {
                                     Enter your credentials to access your account
                                 </div>
                             </div>
+
+                            {error && (
+                                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                    <span className="block sm:inline">{error}</span>
+                                </div>
+                            )}
 
                             <div className="space-y-4 flex flex-col items-center">
                                 <FormInput
@@ -56,9 +84,12 @@ export function Signin() {
                             <div className="flex flex-col items-center space-y-4">
                                 <button
                                     onClick={signin}
-                                    className="w-4/5 bg-blue-600 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                    disabled={isLoading}
+                                    className={`w-4/5 bg-blue-600 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                                        isLoading ? "opacity-50 cursor-not-allowed" : ""
+                                    }`}
                                 >
-                                    Sign In
+                                    {isLoading ? "Signing in..." : "Sign In"}
                                 </button>
                                 
                                 <div className="text-blue-600">
