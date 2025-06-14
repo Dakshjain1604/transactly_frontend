@@ -1,7 +1,7 @@
 # Transactly - Full Stack Payments Application
 
 A modern payment application clone built with React, Node.js, and MongoDB, featuring secure authentication, real-time transactions, and a responsive user interface.
-![Screenshot 2025-05-23 at 11 55 14 PM](https://github.com/user-attachments/assets/f6dbe5b4-094f-4854-8828-74b00b46efd7)
+
 
 ## Features
 
