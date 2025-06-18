@@ -16,7 +16,7 @@ export function AppBar() {
                             <div className="pl-3 cursor-pointer hover:scale-105 transition-all" onClick={()=>{
                                 navigate('/dashboard')
                             }}>TRANSCTLY</div>
-                            <div className="text-sm opacity-20 pl-20">
+                            <div className="text-sm opacity-40 pl-20 text-gray-400">
                                 Backend is deployed on render free version , requests might be slow upto 50 seconds due to inactivity
                             </div>
                         </div>
