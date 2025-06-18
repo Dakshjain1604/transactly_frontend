@@ -29,7 +29,7 @@ export function Signup() {
     setError("");
 
     try {
-      const response = await axios.post(`${BACKEND_URL}/user/signup`, {
+      await axios.post(`${BACKEND_URL}/user/signup`, {
         firstname,
         lastname,
         username,
