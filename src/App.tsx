@@ -5,13 +5,14 @@ import { Signup } from './components/signup';
 import {Dashboard} from "./components/Dashboard"
 import {SendMoney} from "./components/sendMoney"
 import { History } from './components/history';
+import LandingPage from './components/LandingPage';
 function App() {
   
   return (
     <>
     <BrowserRouter>
       <Routes>
-        
+        <Route path='/' element={<LandingPage/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='Signin' element={<Signin/>}></Route>
         <Route path="/dashboard" element={<Dashboard />} />

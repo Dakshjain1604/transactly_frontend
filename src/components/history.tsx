@@ -53,7 +53,7 @@ export function History() {
   if (loading) {
     return (
       <div className="min-h-screen bg-blue-50">
-        <AppBar />
+        <AppBar isLandingPage="false"/>
         <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <div className="text-xl text-blue-600">Loading transaction history...</div>
         </div>
@@ -64,7 +64,7 @@ export function History() {
   if (error) {
     return (
       <div className="min-h-screen bg-blue-50">
-        <AppBar />
+        <AppBar isLandingPage="false"/>
         <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <div className="text-xl text-red-600">Error: {error}</div>
         </div>
@@ -77,7 +77,7 @@ export function History() {
 
   return (
     <div className="min-h-screen bg-blue-50">
-      <AppBar />
+      <AppBar isLandingPage="false"/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-3xl font-bold text-blue-800 mb-8">
           Transaction History

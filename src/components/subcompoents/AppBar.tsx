@@ -2,8 +2,10 @@
 import { useNavigate } from "react-router-dom";
 import { WalletIcon } from "../../icons/walletIcon";
 import { UserIcon } from "../../icons/userIcon";
-
-export function AppBar() {
+interface LandingPage{
+    isLandingPage:"true"|"false"
+}
+export function AppBar(props:LandingPage) {
     const navigate = useNavigate();
 
     return (
@@ -19,7 +21,7 @@ export function AppBar() {
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <button
+                        {props.isLandingPage==="false" &&<button
                             onClick={() => {
                                 sessionStorage.removeItem("token");
                                 navigate("/signin");
@@ -27,7 +29,19 @@ export function AppBar() {
                             className="bg-blue-300 text-blue-800 px-4 py-2 rounded-md  hover:bg-blue-400  border border-blue-400"
                         >
                             Logout
-                        </button>
+                        </button>}
+
+                        {props.isLandingPage==="true" && <button
+                            onClick={() => {
+                                
+                                navigate("/signup");
+                            }}
+                            className="bg-blue-300 text-blue-800 px-4 py-2 rounded-md  hover:bg-blue-400  border border-blue-400"
+                        >
+                            Sign up
+                        </button>}
+
+                        
                         <UserIcon/>
                     </div>
                 </div>

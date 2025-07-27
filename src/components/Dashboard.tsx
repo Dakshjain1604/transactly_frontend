@@ -6,7 +6,7 @@ import { Users } from "./users"
 export function Dashboard() {
     return <>
         <div>
-            <AppBar />
+            <AppBar isLandingPage="false"/>
             <BalanceBar />
             <Users />
         </div>

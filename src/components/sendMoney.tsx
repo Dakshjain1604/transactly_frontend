@@ -67,7 +67,7 @@ export function SendMoney() {
   if (!id || !name) {
     return (
       <div className="min-h-screen bg-blue-50">
-        <AppBar />
+        <AppBar isLandingPage="false"/>
         <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <div className="w-full max-w-2xl px-4 sm:px-6 lg:px-8">
             <div className="bg-white/90 backdrop-blur-sm w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8 hover-scale">
@@ -91,7 +91,7 @@ export function SendMoney() {
 
   return (
     <div className="min-h-screen bg-blue-50">
-      <AppBar />
+      <AppBar isLandingPage="false"/>
       <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
         <div className="w-full max-w-2xl px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-200 rounded-xl shadow-lg border border-blue-100 p-8 hover:shadow-xl transition-all">
