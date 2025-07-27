@@ -1,13 +1,14 @@
 import  { useState } from 'react';
 import { ArrowRight, Send, Shield, Zap } from 'lucide-react';
 import { AppBar } from './subcompoents/AppBar';
-
+import {  useNavigate } from 'react-router-dom';
 const LandingPage = () => {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
-
+  const navigate=useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 relative overflow-hidden">
       {/* Background Elements */}
+
       <AppBar isLandingPage="true"/>
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-32 h-32 bg-blue-400 rounded-full opacity-10 blur-xl animate-pulse"></div>
@@ -63,6 +64,9 @@ const LandingPage = () => {
           <button
             onMouseEnter={() => setHoveredButton('signup')}
             onMouseLeave={() => setHoveredButton(null)}
+            onClick={()=>{
+              navigate("/signup")
+            }}
             className="group relative px-12 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold text-lg rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/25 min-w-[200px]"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -75,6 +79,9 @@ const LandingPage = () => {
           <button
             onMouseEnter={() => setHoveredButton('signin')}
             onMouseLeave={() => setHoveredButton(null)}
+            onClick={()=>{
+              navigate("/signin")
+            }}
             className="group relative px-12 py-4 bg-white/10 backdrop-blur-sm text-white font-bold text-lg rounded-2xl border-2 border-white/30 shadow-xl transform transition-all duration-300 hover:scale-105 hover:bg-white/20 hover:border-white/50 min-w-[200px]"
           >
             <div className="relative flex items-center justify-center gap-2">
