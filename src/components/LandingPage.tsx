@@ -7,7 +7,7 @@ const LandingPage = () => {
   const navigate=useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 relative overflow-hidden">
-      {/* Background Elements */}
+  
 
       <AppBar isLandingPage="true"/>
       <div className="absolute inset-0">
@@ -15,8 +15,6 @@ const LandingPage = () => {
         <div className="absolute bottom-40 right-20 w-48 h-48 bg-indigo-400 rounded-full opacity-10 blur-xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500 rounded-full opacity-5 blur-3xl"></div>
       </div>
-
-      {/* Floating Icons */}
       <div className="absolute top-32 right-32 opacity-20 animate-bounce">
         <Send className="w-8 h-8 text-blue-300" />
       </div>
@@ -29,10 +27,7 @@ const LandingPage = () => {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
-        {/* Logo/Brand */}
-       
-
-        {/* Hero Content */}
+     
         <div className="max-w-4xl mx-auto mb-12">
           <h2 className="text-6xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
             Send Money
@@ -45,7 +40,6 @@ const LandingPage = () => {
             The fastest, secure way to send and receive money with friends and family
           </p>
 
-          {/* Feature Pills */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
               <Zap className="w-4 h-4 text-yellow-400" />
@@ -59,7 +53,6 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
           <button
             onMouseEnter={() => setHoveredButton('signup')}
@@ -90,12 +83,7 @@ const LandingPage = () => {
             </div>
           </button>
         </div>
-
-  
-        
       </div>
-
-      
     </div>
   );
 };

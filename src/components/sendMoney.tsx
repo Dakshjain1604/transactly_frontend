@@ -17,6 +17,7 @@ export function SendMoney() {
   const [messageType, setMessageType] = useState<'success' | 'error'>('success');
   const [message, setMessage] = useState("");
 
+
   const handleSendMoney = async () => {
     if (!amount || Number(amount) <= 0) {
       setError("Please enter a valid amount");
@@ -25,7 +26,7 @@ export function SendMoney() {
 
     setIsLoading(true);
     setError("");
-
+    
     try {
       const response = await axios.post(
         "http://localhost:3000/account/sendMoney",
