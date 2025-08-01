@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { HistoryIcon } from "../../icons/historyIcon";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../config";
 
 
 
@@ -11,7 +12,7 @@ export function BalanceBar() {
     useEffect(() => {
         const fetchBalance = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/account/balance", {
+                const response = await axios.get(`${BACKEND_URL}account/balance`, {
                     headers: {
                         Authorization: "Bearer " + sessionStorage.getItem("token"),
                     },

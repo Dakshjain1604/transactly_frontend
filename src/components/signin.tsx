@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { AppBar } from "./subcompoents/AppBar";
 import { FormInput } from "./subcompoents/FormInput";
+import { BACKEND_URL } from "../config";
 
 export function Signin() {
     const usernameRef = useRef<HTMLInputElement>(null);
@@ -12,7 +13,7 @@ export function Signin() {
     async function signin() {
         const username = usernameRef.current?.value;
         const password = passwordRef.current?.value;
-        await axios.post("http://localhost:3000/user/signin", {
+        await axios.post(`${BACKEND_URL}/user/signin`, {
             username,
             password
         }).then((response) => {

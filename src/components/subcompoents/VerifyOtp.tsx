@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-
+import { BACKEND_URL } from "../../config";
 export function VerifyOtp({ onVerified }: { onVerified: () => void }) {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export function VerifyOtp({ onVerified }: { onVerified: () => void }) {
     setSendingOtp(true);
     setError(null);
     try {
-      const res = await axios.get("http://localhost:3000/user/Sendotp", {
+      const res = await axios.get(`${BACKEND_URL}/user/Sendotp`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +46,7 @@ export function VerifyOtp({ onVerified }: { onVerified: () => void }) {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/user/verifyotp",
+        `${BACKEND_URL}/user/verifyotp`,
         { otp_code: otp },
         {
           headers: {

@@ -5,6 +5,7 @@ import { AppBar } from "./subcompoents/AppBar";
 import { FormInput } from "./subcompoents/FormInput";
 import { MessagePopup } from "./subcompoents/MessagePopup";
 import { VerifyOtp } from "./subcompoents/VerifyOtp";
+import { BACKEND_URL } from "../config";
 
 export function SendMoney() {
   const [searchParams] = useSearchParams();
@@ -32,7 +33,7 @@ export function SendMoney() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/account/sendMoney",
+        `${BACKEND_URL}/account/sendMoney`,
         {
           to: id,
           amount: Number(amount),
