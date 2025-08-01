@@ -18,6 +18,7 @@ export function AppBar(props:LandingPage) {
                             <div className="pl-3 cursor-pointer hover:scale-105 transition-all" onClick={()=>{
                                 navigate('/dashboard')
                             }}>TRANSCTLY</div>
+                            <div></div>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
