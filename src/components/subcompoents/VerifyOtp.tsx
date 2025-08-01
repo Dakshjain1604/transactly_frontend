@@ -2,12 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
-export function VerifyOtp() {
+export function VerifyOtp({ onVerified }: { onVerified: () => void }) {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
 
   const token = sessionStorage.getItem("token");
 
@@ -22,7 +23,8 @@ export function VerifyOtp() {
       });
 
       if (res.status === 200) {
-        setSuccess(true);
+        setOtpSent(true);
+        setOtpVerified(false);
       } else {
         setError("OTP request failed.");
       }
@@ -39,30 +41,30 @@ export function VerifyOtp() {
   const verifyOtp = async () => {
     setLoading(true);
     setError(null);
-    setSuccess(false);
+    setOtpSent(false);
+    setOtpVerified(false);
 
     try {
       const res = await axios.post(
         "http://localhost:3000/user/verifyotp",
-        { otp },
+        { otp_code: otp },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
           },
         }
       );
-
-      if (res.status === 200 ) {
-        setSuccess(true);
-      } else {
-        setError("Invalid OTP.");
+      
+      if (res.status === 200) {
+        setOtpVerified(true);
+        setOtp(""); 
+        onVerified();
       }
     } catch (err: any) {
       console.error("Error verifying OTP:", err);
       setError(
         err.response?.data?.message ||
-          "Verification failed. Ensure the OTP is correct."
+          `Server error (${err.response?.status || "Unknown"}). Please try again.`
       );
     } finally {
       setLoading(false);
@@ -72,7 +74,7 @@ export function VerifyOtp() {
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white rounded-xl shadow-md border mt-10">
       <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">
-        Verify Your Email
+        Verify Your Payment
       </h2>
 
       {error && (
@@ -81,9 +83,15 @@ export function VerifyOtp() {
         </div>
       )}
 
-      {success && !loading && !sendingOtp && (
+      {otpSent && !loading && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 mb-4 rounded">
-          {otp ? "OTP verified successfully!" : "OTP sent successfully!"}
+          OTP sent successfully!
+        </div>
+      )}
+
+      {otpVerified && !loading && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 mb-4 rounded">
+          OTP verified successfully! 🎉
         </div>
       )}
 
@@ -112,10 +120,12 @@ export function VerifyOtp() {
       />
 
       <button
-        disabled={loading}
+        disabled={loading || !otp.trim()}
         onClick={verifyOtp}
         className={`w-full py-2 px-4 rounded-md text-white ${
-          loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+          loading || !otp.trim()
+            ? "bg-blue-300 cursor-not-allowed"
+            : "bg-blue-600 hover:bg-blue-700"
         }`}
       >
         {loading ? (

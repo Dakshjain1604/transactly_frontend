@@ -4,6 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { AppBar } from "./subcompoents/AppBar";
 import { FormInput } from "./subcompoents/FormInput";
 import { MessagePopup } from "./subcompoents/MessagePopup";
+import { VerifyOtp } from "./subcompoents/VerifyOtp";
 
 export function SendMoney() {
   const [searchParams] = useSearchParams();
@@ -14,9 +15,11 @@ export function SendMoney() {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const [messageType, setMessageType] = useState<'success' | 'error'>('success');
+  const [messageType, setMessageType] = useState<"success" | "error">(
+    "success"
+  );
   const [message, setMessage] = useState("");
-
+  const [showOtp, setShowOtp] = useState(false);
 
   const handleSendMoney = async () => {
     if (!amount || Number(amount) <= 0) {
@@ -26,7 +29,7 @@ export function SendMoney() {
 
     setIsLoading(true);
     setError("");
-    
+
     try {
       const response = await axios.post(
         "http://localhost:3000/account/sendMoney",
@@ -40,14 +43,17 @@ export function SendMoney() {
           },
         }
       );
-      
+
       if (response.status === 200 || response.data.success) {
         setMessage("Transfer successful!");
-        setMessageType('success');
+        setMessageType("success");
         setShowMessage(true);
+        setShowOtp(false);
       } else {
-        setMessage(response.data.message || "Transaction failed. Please try again.");
-        setMessageType('error');
+        setMessage(
+          response.data.message || "Transaction failed. Please try again."
+        );
+        setMessageType("error");
         setShowMessage(true);
       }
     } catch (error: any) {
@@ -58,7 +64,7 @@ export function SendMoney() {
       } else {
         setMessage("Error sending money. Please try again.");
       }
-      setMessageType('error');
+      setMessageType("error");
       setShowMessage(true);
     } finally {
       setIsLoading(false);
@@ -68,7 +74,7 @@ export function SendMoney() {
   if (!id || !name) {
     return (
       <div className="min-h-screen bg-blue-50">
-        <AppBar isLandingPage="false"/>
+        <AppBar isLandingPage="false" />
         <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
           <div className="w-full max-w-2xl px-4 sm:px-6 lg:px-8">
             <div className="bg-white/90 backdrop-blur-sm w-full max-w-md rounded-xl shadow-lg border border-gray-100 p-8 hover-scale">
@@ -92,7 +98,7 @@ export function SendMoney() {
 
   return (
     <div className="min-h-screen bg-blue-50">
-      <AppBar isLandingPage="false"/>
+      <AppBar isLandingPage="false" />
       <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
         <div className="w-full max-w-2xl px-4 sm:px-6 lg:px-8">
           <div className="bg-blue-200 rounded-xl shadow-lg border border-blue-100 p-8 hover:shadow-xl transition-all">
@@ -100,13 +106,15 @@ export function SendMoney() {
               <MessagePopup
                 type={messageType}
                 message={message}
-                showDashboardButton={messageType === 'success'}
+                showDashboardButton={messageType === "success"}
               />
             )}
 
             <div className="space-y-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-800">Send Money</div>
+                <div className="text-3xl font-bold text-blue-800">
+                  Send Money
+                </div>
                 <div className="text-blue-600 mt-2">
                   Transfer money to {name}
                 </div>
@@ -137,17 +145,30 @@ export function SendMoney() {
                 />
               </div>
 
+              {showOtp && (
+                <VerifyOtp
+                  onVerified={async () => {
+                    await handleSendMoney();
+                    setShowOtp(false);
+                  }}
+                />
+              )}
+
               <div className="flex flex-col items-center space-y-4">
                 <button
-                  onClick={handleSendMoney}
+                  onClick={() => {
+                    if (!amount || Number(amount) <= 0) {
+                      setError("Please enter a valid amount");
+                      return;
+                    }
+                    setShowOtp(true); 
+                  }}
                   disabled={isLoading}
-                  className={`w-4/5 bg-blue-600 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-blue-700 hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                    isLoading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                  className="w-4/5 bg-blue-400 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-blue-500 hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
                 >
                   {isLoading ? "Processing..." : "Initiate Transfer"}
                 </button>
-                
+
                 <button
                   onClick={() => navigate("/dashboard")}
                   className="w-4/5 bg-red-400 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-red-500 hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"

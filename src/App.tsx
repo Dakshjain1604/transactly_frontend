@@ -6,7 +6,7 @@ import {Dashboard} from "./components/Dashboard"
 import {SendMoney} from "./components/sendMoney"
 import { History } from './components/history';
 import LandingPage from './components/LandingPage';
-import { VerifyOtp } from './components/subcompoents/VerifyOtp';
+
 function App() {
   
   return (
@@ -19,7 +19,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/send" element={<SendMoney />} />
         <Route path="/history" element={<History/>} />
-        <Route path="/otp" element={<VerifyOtp/>}/>
       </Routes>
     </BrowserRouter>
     </>
