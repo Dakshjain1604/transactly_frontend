@@ -2,13 +2,14 @@ import { useState, useEffect } from "react"
 import { SendMoneyButton } from "./subcompoents/sendMoneyButton";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 export const Users = () => {
     const [users, setUsers] = useState([]);
     const [filter, setfilter] = useState("");
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/user/find/?filter=${filter}`).then(response => {
+        axios.get(`${BACKEND_URL}/user/find/?filter=${filter}`).then(response => {
             setUsers(response.data.users);
         })
     }, [filter])
