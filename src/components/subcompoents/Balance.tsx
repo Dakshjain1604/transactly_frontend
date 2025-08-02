@@ -12,7 +12,7 @@ export function BalanceBar() {
     useEffect(() => {
         const fetchBalance = async () => {
             try {
-                const response = await axios.get(`${BACKEND_URL}account/balance`, {
+                const response = await axios.get(`${BACKEND_URL}/account/balance`, {
                     headers: {
                         Authorization: "Bearer " + sessionStorage.getItem("token"),
                     },
