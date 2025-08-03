@@ -22,7 +22,7 @@ export function AppBar(props:LandingPage) {
                             }}>TRANSCTLY</div>
                             <div></div>
                         </div>
-                        <div className="text-gray-400 opacity-20"> backend is deployed on render , which might cause delay in request processing due to inactivity</div>
+                        <div className=" flex text-gray-500 text-sm justify-center"> backend is deployed on render , which might cause delay in request processing due to inactivity</div>
                     </div>
                     <div className="flex items-center space-x-4">
                         {props.isLandingPage==="false" &&<button
