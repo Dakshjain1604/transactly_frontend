@@ -14,12 +14,15 @@ export function AppBar(props:LandingPage) {
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center">
                         <div className="text-blue-800 text-xl font-semibold tracking-wide flex items-center">
-                            <div><WalletIcon/></div>
+                            <div onClick={()=>{
+                                navigate('/')
+                            }}><WalletIcon/></div>
                             <div className="pl-3 cursor-pointer hover:scale-105 transition-all" onClick={()=>{
                                 navigate('/dashboard')
                             }}>TRANSCTLY</div>
                             <div></div>
                         </div>
+                        <div className="text-gray-400 opacity-20"> backend is deployed on render , which might cause delay in request processing due to inactivity</div>
                     </div>
                     <div className="flex items-center space-x-4">
                         {props.isLandingPage==="false" &&<button
